@@ -16,6 +16,14 @@ Published on GitHub Container Registry:
 
 ---
 
+## 🧪 One-shot run (without Compose)
+
+```bash
+docker run --rm ghcr.io/alfiosalanitri/imapsync-docker:latest \
+  -e USER_1=... -e PASSWORD_1=... -e HOST_1=... \
+  -e USER_2=... -e PASSWORD_2=... -e HOST_2=...
+```
+
 ## 📦 Usage (Docker Compose)
 
 1. **Clone the repo** and copy the `.env.example` to `.env`:
@@ -50,29 +58,27 @@ SSL_2=yes
 | `SSL_2`      | ❌        | Set to `yes` to enable SSL for target |
 
 
-3. **Run the sync**:
+3. **Run compose**:
 
 ```bash
-docker compose up --build
+docker compose up
 ```
 
 ---
 
-## 🧪 One-shot run (without Compose)
+## 🛠️ Build Locally 
 
-```bash
-docker run --rm ghcr.io/alfiosalanitri/imapsync-docker:latest \
-  -e USER_1=... -e PASSWORD_1=... -e HOST_1=... \
-  -e USER_2=... -e PASSWORD_2=... -e HOST_2=...
-```
-
----
-
-## 🛠️ Build Locally
+### without Compose
 
 ```bash
 docker build -t imapsync-docker .
 docker run --rm --env-file .env imapsync-docker
+```
+
+### with Docker Compose
+
+```bash
+docker compose up --build
 ```
 
 ---
