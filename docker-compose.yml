@@ -1,0 +1,6 @@
+services:
+  imapsync:
+    image: ghcr.io/alfiosalanitri/imapsync-docker:latest
+    container_name: imapsync
+    env_file:
+      - .env
