@@ -37,6 +37,7 @@ jobs:
             echo "tags=${IMAGE_NAME}:${TAG_VERSION},${IMAGE_NAME}:latest" >> $GITHUB_OUTPUT
           else
             echo "tags=${IMAGE_NAME}:latest" >> $GITHUB_OUTPUT
+          fi
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
