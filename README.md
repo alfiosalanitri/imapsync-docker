@@ -16,17 +16,7 @@ Published on GitHub Container Registry:
 
 ---
 
-## 🧪 One-shot run (without Compose)
-
-```bash
-docker run --rm ghcr.io/alfiosalanitri/imapsync-docker:latest \
-  -e USER_1=... -e PASSWORD_1=... -e HOST_1=... \
-  -e USER_2=... -e PASSWORD_2=... -e HOST_2=...
-```
-
-## 📦 Usage (Docker Compose)
-
-1. **Clone the repo** and copy the `.env.example` to `.env`:
+## 📦 Usage
 
 ```bash
 cp .env.example .env
@@ -58,42 +48,28 @@ SSL_2=yes
 | `SSL_2`      | ❌        | Set to `yes` to enable SSL for target |
 
 
-3. **Run compose**:
+3. **Run**:
 
 ```bash
-docker compose up
+docker run --rm --env-file .env ghcr.io/alfiosalanitri/imapsync-docker:latest
 ```
+
+### 📝 Usage Notes
+
+When running on Arch Linux with rootless Docker, hostname resolution (e.g. mail.example.com) may not work due to systemd-resolved or DNS configuration in the user namespace.
+
+✅ As a workaround, use the server’s IP address instead of its DNS name in HOST_1 and HOST_2.
 
 ---
 
 ## 🛠️ Build Locally 
-
-### without Compose
 
 ```bash
 docker build -t imapsync-docker .
 docker run --rm --env-file .env imapsync-docker
 ```
 
-### with Docker Compose
-
-```bash
-docker compose up --build
-```
-
 ---
-
-## 🔖 Tagged Versions
-
-You can use a specific version tag:
-
-```yaml
-services:
-  imapsync:
-    image: ghcr.io/alfiosalanitri/imapsync-docker:v1.0.0
-    env_file:
-      - .env
-```
 
 > Recommended for production use.
 
@@ -123,7 +99,6 @@ This will:
 - `Dockerfile`: Builds the imapsync container.
 - `entrypoint.sh`: Sync logic.
 - `.env.example`: Example env file.
-- `docker-compose.yml`: Ready-to-run setup.
 - `release.sh`: Automates release & tagging.
 - `.github/workflows/publish.yml`: Publishes images to GHCR.
 
